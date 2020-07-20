@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d0651d64-a0ae-470b-8f8e-619e5a6fdc95" name="Default Changelist" comment="" />
+    <list default="true" id="d0651d64-a0ae-470b-8f8e-619e5a6fdc95" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +28,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -37,11 +40,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1595275704169</updated>
-      <workItem from="1595275705837" duration="1023000" />
+      <workItem from="1595275705837" duration="1785000" />
+      <workItem from="1595277610599" duration="383000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="27" y="16" key="SettingsEditor" timestamp="1595277995421">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="27" y="16" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595277995421" />
   </component>
 </project>
