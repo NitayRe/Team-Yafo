@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0651d64-a0ae-470b-8f8e-619e5a6fdc95" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +28,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -41,7 +41,7 @@
       <option name="presentableId" value="Default" />
       <updated>1595275704169</updated>
       <workItem from="1595275705837" duration="1785000" />
-      <workItem from="1595277610599" duration="383000" />
+      <workItem from="1595277610599" duration="929000" />
     </task>
     <servers />
   </component>
@@ -49,9 +49,9 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="27" y="16" key="SettingsEditor" timestamp="1595277995421">
+    <state x="27" y="16" key="SettingsEditor" timestamp="1595278006744">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="27" y="16" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595277995421" />
+    <state x="27" y="16" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595278006744" />
   </component>
 </project>
