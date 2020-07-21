@@ -135,7 +135,7 @@ dices.append(Dice(0, HEIGHT // 2 - 10))
 dices.append(Dice(0, HEIGHT // 2 + 10))
 def main():
     message_display('for a regular game, press 1', WIDTH//2, 200)
-    message_display('to choose the start situatoin, press 2', WIDTH//2, 400)
+    message_display('to choose the start situation, press 2', WIDTH//2, 400)
     chosen = False
     while not chosen:
         for event in pg.event.get():
