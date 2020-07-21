@@ -63,9 +63,14 @@ def trySpecialMove(stacks, possibleSteps, removed, turn, index):
     removeIndex = 0
     if turn == BLACK: removeIndex = 1
     if hasOut(removed, turn):
+        oppHome = homeBlack
+        if turn == BLACK:
+            oppHome = homeWhite
         step = min(index + 1, 24 - index)
+        if index not in oppHome:
+            return False
         if step in possibleSteps:
-            
+        
             if stacks[index].isEmpty() or stacks[index].getColor() == turn:
                 stacks[index].push(removed[removeIndex].pop())
                 possibleSteps.remove(step)
