@@ -1,5 +1,7 @@
 import pygame as pg
-from pieces import Stack, Piece
+from pieces import Stack, Piece, OutStack
+from dice import Dice
+import logic
 
 WIDTH = 800
 HEIGHT = 600
@@ -12,18 +14,21 @@ clock = pg.time.Clock()
 stacks = []
 stackX = 0
 stackY = 0
-for i in range(24):
-    if i < 12:
+for _ in range(12):
         stacks.append(Stack(stackX, stackY))
         stackX += DIFF_X
-    elif i == 12:
-        stackX = 0
-        stackY = HEIGHT
+stackX -= DIFF_X
+stackY = HEIGHT
+for _ in range(12):
         stacks.append(Stack(stackX, stackY))
-        stackX += DIFF_X
-    else:
-        stacks.append(Stack(stackX, stackY))
-        stackX += DIFF_X
+        stackX -= DIFF_X
+
+removedPieces = []
+stackY = HEIGHT // 2 - 38
+for _ in range(12):
+    removedPieces.append(OutStack(WIDTH // 2 - 2*DIFF_X, stackY))
+    stackY += DIFF_X
+stacks += removedPieces
 
 
 def regularStart():
@@ -36,13 +41,13 @@ def regularStart():
     for i in range(5):
         stacks[11].push(Piece(Piece.WHITE))
     for i in range(5):
-        stacks[23].push(Piece(Piece.BLACK))
-    for i in range(3):
-        stacks[18].push(Piece(Piece.WHITE))
-    for i in range(5):
-        stacks[16].push(Piece(Piece.WHITE))
-    for i in range(2):
         stacks[12].push(Piece(Piece.BLACK))
+    for i in range(3):
+        stacks[16].push(Piece(Piece.WHITE))
+    for i in range(5):
+        stacks[18].push(Piece(Piece.WHITE))
+    for i in range(2):
+        stacks[23].push(Piece(Piece.BLACK))
 
 
 def chooseStartGamePlaces():
@@ -91,39 +96,8 @@ def chooseStartGamePlaces():
             s.draw(screen)
         pg.display.flip()
         clock.tick(30)
-        
-
-
-def main():
-    message_display('for a regular game, press 1', WIDTH//2, 200)
-    message_display('to choose the start situatoin, press 2', WIDTH//2, 400)
-    chosen = False
-    while not chosen:
-        for event in pg.event.get():
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_1:
-                    regularStart()
-                    chosen = True
-                elif event.key == pg.K_2:
-                    chooseStartGamePlaces()
-                    chosen = True
-                    
-            if event.type == pg.QUIT:
-                exit(1)
-            break
-        clock.tick(30)
-
-    screen.blit(background_image, [0, 0])
-    while True:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                exit(1)
-			
-        for s in stacks:
-            s.draw(screen)
-        pg.display.flip()
-        clock.tick(30)
-
+        print(f"white:{logic.isEndOfGame(stacks, Piece.WHITE)} -- black:{logic.isEndOfGame(stacks, Piece.BLACK)}")
+ 
 
 def text_objects(text, font):
     black = (0, 0, 0)
@@ -152,7 +126,63 @@ def whichStack(x, y):
     if y < HEIGHT//2:
         return x // DIFF_X
     else:
-        return x // DIFF_X + 12
+        return 23 - x // DIFF_X
+
+
+
+dices = []
+dices.append(Dice(0, HEIGHT // 2 - 10))
+dices.append(Dice(0, HEIGHT // 2 + 10))
+def main():
+    message_display('for a regular game, press 1', WIDTH//2, 200)
+    message_display('to choose the start situatoin, press 2', WIDTH//2, 400)
+    chosen = False
+    while not chosen:
+        for event in pg.event.get():
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_1:
+                    regularStart()
+                    chosen = True
+                elif event.key == pg.K_2:
+                    chooseStartGamePlaces()
+                    chosen = True
+                
+            if event.type == pg.QUIT:
+                exit(1)
+            break
+        clock.tick(30)
+    
+
+    turn = 0
+    turns = [Piece.WHITE, Piece.BLACK]
+    while True:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                exit(1)
+        
+        for dice in dices:
+            dice.roll()
+        
+        screen.blit(background_image, [0, 0])
+        for s in stacks:
+            s.draw(screen)
+        for dice in dices:
+            dice.draw(screen)
+    
+        pg.display.flip()
+        clock.tick(30)
+        
+        for _ in logic.playOneTurn(stacks, dices[0].get_dice(), dices[1].get_dice(), turns[turn], removedPieces):
+            print("Played")
+            screen.blit(background_image, [0, 0])
+            for s in stacks:
+                s.draw(screen)
+            for dice in dices:
+                dice.draw(screen)
+        
+            pg.display.flip()
+            clock.tick(30)
+        turn = 1 - turn
 
 
 if __name__ == '__main__':
