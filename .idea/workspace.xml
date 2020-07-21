@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d0651d64-a0ae-470b-8f8e-619e5a6fdc95" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
-    </list>
+    <list default="true" id="d0651d64-a0ae-470b-8f8e-619e5a6fdc95" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,10 +23,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -49,9 +48,10 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="27" y="16" key="SettingsEditor" timestamp="1595278006744">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="38" y="23" key="SettingsEditor" timestamp="1595321858097">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="27" y="16" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595278006744" />
+    <state x="38" y="23" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1595321858097" />
   </component>
 </project>
