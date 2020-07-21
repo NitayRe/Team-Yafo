@@ -95,6 +95,8 @@ for i in range(24):
         stackX += 66
 
 screen.blit(background_image, [0, 0])
+
+
 def main():
     while 1:
         for event in pg.event.get():
@@ -114,11 +116,14 @@ def main():
         clock.tick(30)
         turn = 1 - turn
 
+
 def whichStack(x,y):
     if y < 400:
         return int(x/66)
     else:
         return int(x/66)+12
+
+
 if __name__ == '__main__':
     pg.init()
     main()
