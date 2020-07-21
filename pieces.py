@@ -1,5 +1,6 @@
 import pygame as pg
 
+WIDTH = 800
 HEIGHT = 600
 
 class Piece:
@@ -52,7 +53,7 @@ class Stack:
 				piece.draw(screen, x, y + 40)
 				y += 40
 				
-				if abs(y - self.y) > HEIGHT // 2 - 60:
+				if abs(y - self.y) > HEIGHT // 2 - 120:
 					y = 5
 					x -= 5
 			
@@ -61,10 +62,16 @@ class Stack:
 				piece.draw(screen, x, y - 40)
 				y -= 40
 			
-				if abs(y - self.y) > HEIGHT // 2 - 60:
+				if abs(y - self.y) > HEIGHT // 2 - 120:
 					y = self.y - 5
 					x -= 5
 			
 	
-
-
+class OutStack(Stack):
+	def draw(self, screen):
+		x = self.x
+		y = self.y
+		for piece in self.items:
+			piece.draw(screen, x, y)
+			x += 40
+			
