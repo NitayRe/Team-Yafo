@@ -1,0 +1,48 @@
+import pygame
+import random as rnd
+
+
+class Dice:
+    def __init__(self, x, y):
+        self.value = -1
+        self.x = x
+        self.y = y
+
+    def roll(self):
+        self.value = rnd.randint(1, 6)
+
+    def get_dice(self):
+        return self.value
+
+    def draw(self):
+        if self.value == 1:
+            dice = pygame.image.load("one").convert_alpha
+            dice_rect = dice.get_rect()
+            dice_rect.x = self.x
+            dice_rect.y = self.y
+        elif self.value == 2:
+            dice = pygame.image.load("two")
+            dice_rect = dice.get_rect()
+            dice_rect.x = self.x
+            dice_rect.y = self.y
+        elif self.value == 3:
+            dice = pygame.image.load("three")
+            dice_rect = dice.get_rect()
+            dice_rect.x = self.x
+            dice_rect.y = self.y
+        elif self.value == 4:
+            dice = pygame.image.load("four")
+            dice_rect = dice.get_rect()
+            dice_rect.x = self.x
+            dice_rect.y = self.y
+        elif self.value == 5:
+            dice = pygame.image.load("five")
+            dice_rect = dice.get_rect()
+            dice_rect.x = self.x
+            dice_rect.y = self.y
+        elif self.value == 6:
+            dice = pygame.image.load("six")
+            dice_rect = dice.get_rect()
+            dice_rect.x = self.x
+            dice_rect.y = self.y
+
