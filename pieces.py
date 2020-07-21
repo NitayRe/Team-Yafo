@@ -7,10 +7,15 @@ class Piece:
 	WHITE = 255,255,255
     
 	def __init__(self, color):
-		self.type = color
+		self.color = color
 
 	def getColor(self):
-		return self.type
+		return self.color
+
+	def draw(self, screen, x, y):
+		pg.draw.circle(screen, self.getColor(), (x + 45, y + 40), 20)
+		oppColor = 255-self.color[0], 255-self.color[1], 255-self.color[2]
+		pg.draw.circle(screen, oppColor, (x + 45, y + 40), 20, 2)
 
 
 class Stack:
@@ -41,11 +46,22 @@ class Stack:
 		y = self.y
 		if y == 0:
 			for piece in self.items:
-				pg.draw.circle(screen, piece.getColor(), (x + 45, y + 40), 20)
+				piece.draw(screen, x, y)
 				y += 40
+				
+				if abs(y - self.y) > 300:
+					y = 5
+					x -= 5
+			
 		else:
 			for piece in self.items:
-				pg.draw.circle(screen, piece.getColor(), (x + 45, y - 40), 20)
+				piece.draw(screen, x, y)
 				y -= 40
+			
+				if abs(y - self.y) > 300:
+					y = self.y - 5
+					x -= 5
+			
+	
 
 
