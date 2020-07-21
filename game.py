@@ -82,7 +82,7 @@ screen.blit(background_image, [0, 0])
 
 
 def main():
-    while 1:
+    while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 sys.exit(1)
