@@ -24,8 +24,11 @@ class Stack:
 		self.x = x
 		self.y = y
 
+	def __len__(self):
+		return len(self.items)
+
 	def isEmpty(self):
-		return self.items == []
+		return len(self) == 0
 
 	def push(self, item):
 		self.items.append(item)
