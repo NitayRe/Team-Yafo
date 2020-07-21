@@ -75,9 +75,9 @@ screen.blit(background_image, [0, 0])
 
 
 def main():
-	left_mouse_down = 0
-	right_mouse_down = 0
-	while 1:
+	left_mouse_down = False
+	right_mouse_down = False
+	while True:
 		for event in pg.event.get():
 			if event.type == pg.MOUSEBUTTONDOWN:
 				if event.button == 1:
@@ -104,8 +104,8 @@ def main():
 				if event.key == pg.K_SPACE:
 					pass
 
-			left_mouse_down = 0
-			right_mouse_down = 0
+			left_mouse_down = False
+			right_mouse_down = False
 		for s in stacks:
 			s.draw(screen)
 		pg.display.flip()
@@ -113,9 +113,9 @@ def main():
 
 def whichStack(x,y):
 	if y < 400:
-		return int(x/66)
+		return x//66
 	else:
-		return int(x/66)+12
+		return x//66 + 12
 
 
 if __name__ == '__main__':
