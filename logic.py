@@ -35,8 +35,7 @@ def playOneTurn(stacks, dice1, dice2, turn, removed):
 
 	possibleSteps = [dice1, dice2]
 	if (dice1 == dice2):
-		possibleSteps.append(dice1)
-		possibleSteps.apppend(dice2)
+		possibleSteps *= 2
 
 
 	while len(possibleSteps) != 0:
