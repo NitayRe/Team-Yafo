@@ -1,11 +1,11 @@
 import pieces
 import dice
 import pygame as pg
-import game
 
 WHITE = 255,255,255
 BLACK = 0,0,0
 
+clock = pg.time.Clock()
 
 def move(src, dest, stacks, removed):
 	if (len(stacks[dest]) == 1) and (stacks[dest].getColor() != stacks[src].getColor()):
@@ -41,20 +41,23 @@ def playOneTurn(stacks, dice1, dice2, turn, removed):
 	while len(possibleSteps) != 0:
 		coord=[]
 		while len(coord)<=2:
-			left_mouse_down = False
+			mousePressed = False
 			while True:
 				for event in pg.event.get():
 					if event.type == pg.MOUSEBUTTONDOWN:
 						if event.button == 1:
-							left_mouse_down = True
+							mousePressed = True
 					if event.type == pg.QUIT:
 						exit(1)
 					x = pg.mouse.get_pos()[0]
 					y = pg.mouse.get_pos()[1]
 					index = game.whichStack(x, y)
-					if left_mouse_down:
+					if mousePressed:
 						coord.append(index)
-					left_mouse_down = False
+						clock.tick(300)
+					mousePressed = False
+					clock.tick(30)
+
 		src = coord[0]
 		dest = coord[1]
 		if islegal(stacks, src, dest, possibleSteps, turn):
