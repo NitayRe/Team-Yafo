@@ -3,6 +3,13 @@ import random as rnd
 
 
 class Dice:
+    IMGS = [pygame.image.load("number1.png")
+    ,pygame.image.load("number2.png")
+    ,pygame.image.load("number3.png")
+    ,pygame.image.load("number4.png")
+    ,pygame.image.load("number5.png")
+    ,pygame.image.load("number6.png")]
+    
     def __init__(self, x, y):
         self.value = -1
         self.x = x
@@ -14,26 +21,11 @@ class Dice:
     def get_dice(self):
         return self.value
 
-    def draw(self):
-        if self.value == 1:
-            dice = pygame.image.load("one").convert_alpha
+    def draw(self, screen):
+        if self.value == -1: return
         
-        elif self.value == 2:
-            dice = pygame.image.load("two")
-       
-        elif self.value == 3:
-            dice = pygame.image.load("three")
-         
-        elif self.value == 4:
-            dice = pygame.image.load("four")
-           
-        elif self.value == 5:
-            dice = pygame.image.load("five")
-           
-        elif self.value == 6:
-            dice = pygame.image.load("six")
+        dice = Dice.IMGS[self.value-1]
+        screen.blit(dice, [self.x, self.y])
+
         
-		dice_rect = dice.get_rect()
-        dice_rect.x = self.x
-        dice_rect.y = self.y
 
