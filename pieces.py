@@ -13,9 +13,9 @@ class Piece:
 		return self.color
 
 	def draw(self, screen, x, y):
-		pg.draw.circle(screen, self.getColor(), (x + 45, y - 40), 20)
+		pg.draw.circle(screen, self.getColor(), (x + 45, y + 40), 20)
 		oppColor = 255-self.color[0], 255-self.color[1], 255-self.color[2]
-		pg.draw.circle(screen, oppColor, (x + 45, y - 40), 20, 2)
+		pg.draw.circle(screen, oppColor, (x + 45, y + 40), 20, 2)
 
 
 class Stack:
