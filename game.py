@@ -38,10 +38,7 @@ class DrawableStack(Stack):
         return self.items == []
 
     def push(self, item):
-        if self.items.__len__() == 1 and item.getType() != self.peek().getType():
-            self.pop()
-            self.items.append(item)
-        elif self.items.__len__() < 5:
+        if self.items.__len__() < 5:
             self.items.append(item)
 
     def pop(self):
@@ -72,8 +69,6 @@ class DrawableStack(Stack):
 screen = pg.display.set_mode((800, 800))
 background_image = pg.image.load("background.bmp")
 clock = pg.time.Clock()
-velocity_x = 0
-velocity_y = 0
 black = 0, 0, 0
 white = 255, 255, 255
 BLACKPIECE = 0
@@ -98,24 +93,41 @@ screen.blit(background_image, [0, 0])
 
 
 def main():
+    left_mouse_down = 0
+    right_mouse_down = 0
     while 1:
         for event in pg.event.get():
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    left_mouse_down = True
+                if event.button == 3:
+                    right_mouse_down = True
+
             if event.type == pg.QUIT:
                 sys.exit(1)
-            if event.type == pg.MOUSEBUTTONDOWN:
+
+            if left_mouse_down:
                 x = pg.mouse.get_pos()[0]
                 y = pg.mouse.get_pos()[1]
                 index = whichStack(x, y)
                 stacks[index].push(Piece(BLACKPIECE))
+
+            if right_mouse_down:
+                x = pg.mouse.get_pos()[0]
+                y = pg.mouse.get_pos()[1]
+                index = whichStack(x, y)
+                stacks[index].push(Piece(WHITEPIECE))
+
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_SPACE:
                     pass
+
+            left_mouse_down = 0
+            right_mouse_down = 0
         for s in stacks:
             s.draw()
         pg.display.flip()
         clock.tick(30)
-        turn = 1 - turn
-
 
 def whichStack(x,y):
     if y < 400:
