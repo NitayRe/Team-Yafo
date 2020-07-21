@@ -36,13 +36,13 @@ def regularStart():
     for i in range(5):
         stacks[11].push(Piece(Piece.WHITE))
     for i in range(5):
-        stacks[12].push(Piece(Piece.BLACK))
-    for i in range(3):
-        stacks[16].push(Piece(Piece.WHITE))
-    for i in range(5):
-        stacks[18].push(Piece(Piece.WHITE))
-    for i in range(2):
         stacks[23].push(Piece(Piece.BLACK))
+    for i in range(3):
+        stacks[18].push(Piece(Piece.WHITE))
+    for i in range(5):
+        stacks[16].push(Piece(Piece.WHITE))
+    for i in range(2):
+        stacks[12].push(Piece(Piece.BLACK))
 
 
 def chooseStartGamePlaces():
