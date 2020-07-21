@@ -130,6 +130,7 @@ dices = []
 dices.append(Dice(0, mid - size // 2))
 dices.append(Dice(0, mid + size // 2))
 def main():
+    pg.font.init()
     message_display('for a regular game, press 1', WIDTH//2, 200)
     message_display('to choose the start situation, press 2', WIDTH//2, 400)
     chosen = False
