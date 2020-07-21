@@ -1,17 +1,27 @@
-WHITE = 0
-BLACK = 1
+import pieces
+import dice
+WHITE = 255,255,255
+BLACK = 0,0,0
 
 
-def move(src, dest, stacks):
-    stacks[dest].push(stacks[src].pop())
+def move(src, dest, stacks, removed, turn):
+	if (len(stacks[dest]) == 1) and (stacks[dest].getColor() != stacks[src].getColor()):
+		pieceToRemove = stacks[dest].pop()
+		if stacks[dest].getColor == WHITE: removed[0].append(pieceToRemove)
+		else: removed[1].append(pieceToRemove)
+
+	stacks[dest].push(stacks[src].pop())
 
 
-def legal(stacks, src, dest, dice1, dice2, turn):
-    if turn == WHITE:
-        if src + dice1 != dest and src + dice2 != dest:
-            return False
-        available = stacks[dest].isEmpty or (stacks[dest].getColor == BLACK and stacks[dest].size == 1)
-        if src + dice1 == dest and available:
-            return True
-        elif src + dice2 == dest and available:
-            return True
+def islegal(stacks, src, dest, possibleSteps, turn):
+	if stacks[src].isEmpty() or stacks[src].getColor() != turn:
+		return False
+
+	if dest-src not in possibleSteps or stack[src].isEmpty():
+		return False
+
+	available = stacks[dest].isEmpty or (stacks[dest].getColor() == stacks[src].getColor()) or (stacks[dest].getColor() !=stacks[dest].getcolor() and len(stacks[dest]) == 1))
+	if not available: return False
+	return True
+
+
