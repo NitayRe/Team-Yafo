@@ -1,11 +1,12 @@
 import pygame as pg
-
+import game
 
 
 class Piece:
 	BLACK = 0,0,0
 	WHITE = 255,255,255
     
+    RADIUS = 17
 	def __init__(self, color):
 		self.color = color
 
@@ -13,9 +14,9 @@ class Piece:
 		return self.color
 
 	def draw(self, screen, x, y):
-		pg.draw.circle(screen, self.getColor(), (x + 45, y + 40), 20)
+		pg.draw.circle(screen, self.getColor(), (x + 45, y + 40), RADIUS)
 		oppColor = 255-self.color[0], 255-self.color[1], 255-self.color[2]
-		pg.draw.circle(screen, oppColor, (x + 45, y + 40), 20, 2)
+		pg.draw.circle(screen, oppColor, (x + 45, y + 40), RADIUS, 1)
 
 
 class Stack:
@@ -52,7 +53,7 @@ class Stack:
 				piece.draw(screen, x, y)
 				y += 40
 				
-				if abs(y - self.y) > 300:
+				if abs(y - self.y) > game.HEIGHT // 2 - 40:
 					y = 5
 					x -= 5
 			
@@ -61,7 +62,7 @@ class Stack:
 				piece.draw(screen, x, y)
 				y -= 40
 			
-				if abs(y - self.y) > 300:
+				if abs(y - self.y) > game.HEIGHT // 2 - 40W:
 					y = self.y - 5
 					x -= 5
 			
