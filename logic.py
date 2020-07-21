@@ -1,7 +1,7 @@
 import pieces
 import dice
 import pygame as pg
-import game
+from game import message_display
 
 WHITE = pieces.Piece.WHITE
 BLACK = pieces.Piece.BLACK
@@ -116,6 +116,10 @@ def playOneTurn(stacks, dice1, dice2, turn, removed):
     possibleSteps.sort()
 
     while len(possibleSteps) != 0:
+        if not moveExists(stacks, turn, removed, possibleSteps):
+            message_display("No valid Moves", 400,60)
+            clock.tick(500)
+            return
         print(possibleSteps)
         src = getCoordinate()
         played = trySpecialMove(stacks, possibleSteps, removed, turn, src)
@@ -131,5 +135,35 @@ def playOneTurn(stacks, dice1, dice2, turn, removed):
             move(src, dest,stacks, removed)
             possibleSteps.remove(abs(dest-src))
             yield 1
-def moveExists(stacks, turn, removed, possible):
-    srcs = {x for x in stacks}
+
+def isAvailable(stacks, turn, index):
+    return stacks[index].isEmpty() or stacks[index].getColor() == turn or len(stacks[index]) == 1
+
+def moveExists(stacks, turn, removed, possibleSteps):
+
+    if hasOut(removed, turn):
+        for i in possibleSteps:
+            if turn == WHITE:
+                if isAvailable(stacks, turn, i-1):
+                    return True
+            if turn == BLACK:
+                if isAvailable(stacks, turn, 24-i):
+                    return True
+        return False
+    srcs = {i for i in range(24) if (not stacks[i].isEmpty()) and stacks[i].getColor() == turn}
+    if isEndOfGame(stacks, turn):
+        maxDie = max(possibleSteps)
+        if turn == WHITE:
+            if max(srcs) + maxDi > 23:
+                return True
+        if turn == BLACK:
+            if min(srcs) - maxDie < 0:
+                return True
+    for src in srcs:
+        for dest in range(24):
+            if islegal(stacks, src, dest,possibleSteps, turn, removed):
+                return True
+    return False
+
+
+
