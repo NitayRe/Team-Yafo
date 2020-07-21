@@ -52,7 +52,7 @@ class Stack:
 				piece.draw(screen, x, y)
 				y += 40
 				
-				if abs(y - self.y) > 300:
+				if abs(y - self.y) > game.HEIGHT // 2 - 40:
 					y = 5
 					x -= 5
 			
@@ -61,7 +61,7 @@ class Stack:
 				piece.draw(screen, x, y)
 				y -= 40
 			
-				if abs(y - self.y) > 300:
+				if abs(y - self.y) > game.HEIGHT // 2 - 40:
 					y = self.y - 5
 					x -= 5
 			
