@@ -68,11 +68,11 @@ def chooseStartGamePlaces():
             index = whichStack(x, y)
 
             if left_mouse_down:
-                if stacks[index].isEmpty or stacks[index].getColor() == Piece.BLACK:
+                if stacks[index].isEmpty() or stacks[index].getColor() == Piece.BLACK:
                     stacks[index].push(Piece(Piece.BLACK))
 
             if right_mouse_down:
-                if stacks[index].isEmpty or stacks[index].getColor() == Piece.WHITE:
+                if stacks[index].isEmpty() or stacks[index].getColor() == Piece.WHITE:
                     stacks[index].push(Piece(Piece.WHITE))
 
             if middle_mouse_down and not stacks[index].isEmpty():
