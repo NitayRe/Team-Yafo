@@ -9,7 +9,7 @@ stacks = []
 stackX = 0
 stackY = 0
 for i in range(24):
-	if i<12:
+	if i < 12:
 		stacks.append(pieces.Stack(stackX, stackY))
 		stackX += 65
 	elif i == 12:
@@ -22,10 +22,29 @@ for i in range(24):
 		stackX += 65
 
 
+def regularStart():
+	for i in range 2:
+		stacks[0].push(pieces.Piece(pieces.Piece.WHITE)
+	for i in range 5:
+		stacks[5].push(pieces.Piece(pieces.Piece.BLACK)
+	for i in range 3:
+		stacks[7].push(pieces.Piece(pieces.Piece.BLACK)
+	for i in range 5:
+		stacks[11].push(pieces.Piece(pieces.Piece.WHITE)
+	for i in range 5:
+		stacks[12].push(pieces.Piece(pieces.Piece.BLACK)
+	for i in range 3:
+		stacks[16].push(pieces.Piece(pieces.Piece.WHITE)
+	for i in range 5:
+		stacks[18].push(pieces.Piece(pieces.Piece.WHITE)
+	for i in range 2:
+		stacks[23].push(pieces.Piece(pieces.Piece.BLACK)
 
 
 
-def main():
+
+
+def chooseStartGamePlaces():
 	left_mouse_down = False
 	right_mouse_down = False
 	middle_mouse_down = False
@@ -45,7 +64,7 @@ def main():
 			x = pg.mouse.get_pos()[0]
 			y = pg.mouse.get_pos()[1]
 			index = whichStack(x, y)
-			
+
 			if left_mouse_down:
 				stacks[index].push(pieces.Piece(pieces.Piece.BLACK))
 
@@ -63,11 +82,38 @@ def main():
 			right_mouse_down = False
 			middle_mouse_down = False
 
+			"""
+			screen.blit(background_image, [0, 0])
+			for s in stacks:
+				s.draw(screen)
+				pg.display.flip()
+				clock.tick(30)
+			"""
+
+def main():
+		message_display('for a regular game, press 1', 400,200)
+		message_display('to choose the start situatoin, press 2', 400,400)
+		for event in pygame.event.get():
+			if event.type == pygame.KEYDOWN
+				if event.key == pygame.K_1:
+					regularStart()
+				elif event.key == pygame.K_2:
+					chooseStartGamePlaces()
+
 		screen.blit(background_image, [0, 0])
 		for s in stacks:
 			s.draw(screen)
 		pg.display.flip()
 		clock.tick(30)
+
+def message_display(text, centerX, centerY):
+	largeText = pygame.font.Font('freesansbold.ttf',115)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = (centerX,centerY)
+    gameDisplay.blit(TextSurf, TextRect)
+    pygame.display.update()
+    #time.sleep(2)
+    #game_loop()
 
 def whichStack(x,y):
 	if y < 400:
@@ -78,5 +124,5 @@ def whichStack(x,y):
 
 if __name__ == '__main__':
 	pg.init()
-	main()
+	chooseStartGamePlaces()
 	pg.quit()
