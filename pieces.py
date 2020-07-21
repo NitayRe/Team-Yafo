@@ -40,7 +40,7 @@ class Stack:
 		return self.items[-1]
 
 	def getColor(self):
-		return self.pop().getColor()
+		return self.peek().getColor()
 
 
 
