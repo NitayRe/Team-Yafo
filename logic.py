@@ -4,7 +4,7 @@ WHITE = 255,255,255
 BLACK = 0,0,0
 
 
-def move(src, dest, stacks, removed, turn):
+def move(src, dest, stacks, removed):
 	if (len(stacks[dest]) == 1) and (stacks[dest].getColor() != stacks[src].getColor()):
 		pieceToRemove = stacks[dest].pop()
 		if stacks[dest].getColor == WHITE: removed[0].append(pieceToRemove)
@@ -25,3 +25,9 @@ def islegal(stacks, src, dest, possibleSteps, turn):
 	return True
 
 
+
+def playOneTurn(turn, dice1, dice2):
+	possibleSteps = [dice1, dice2]
+	if (dice1 == dice2):
+		possibleSteps.append(dice1)
+		possibleSteps.apppend(dice1)
