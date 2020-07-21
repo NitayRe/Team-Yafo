@@ -84,7 +84,7 @@ def chooseStartGamePlaces():
                 stacks[index].pop()
 
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE:
+                if event.key == pg.K_ESCAPE or event.key == pg.K_RETURN :
                     finished = True
 
             left_mouse_down = False
@@ -94,9 +94,9 @@ def chooseStartGamePlaces():
         screen.blit(background_image, [0, 0])
         for s in stacks:
             s.draw(screen)
+        message_display("press ESC or ENTER to start game", WIDTH//2, 300)
         pg.display.flip()
         clock.tick(30)
-        print(f"white:{logic.isEndOfGame(stacks, Piece.WHITE)} -- black:{logic.isEndOfGame(stacks, Piece.BLACK)}")
  
 
 def text_objects(text, font):
@@ -115,11 +115,6 @@ def message_display(text, centerX, centerY):
     screen.blit(text, textRect)
     pg.display.flip()
 
-"""    TextSurf, TextRect = text_objects(text, largeText)
-    TextRect.center = (centerX, centerY)
-    screen.blit(TextSurf, TextRect)
-    pg.display.update()"""
-    
 
 
 def whichStack(x, y):
@@ -129,10 +124,11 @@ def whichStack(x, y):
         return 23 - x // DIFF_X
 
 
-
+size = 40
+mid = HEIGHT // 2 - 22
 dices = []
-dices.append(Dice(0, HEIGHT // 2 - 10))
-dices.append(Dice(0, HEIGHT // 2 + 10))
+dices.append(Dice(0, mid - size // 2))
+dices.append(Dice(0, mid + size // 2))
 def main():
     message_display('for a regular game, press 1', WIDTH//2, 200)
     message_display('to choose the start situation, press 2', WIDTH//2, 400)
@@ -172,9 +168,18 @@ def main():
         pg.display.flip()
         clock.tick(30)
         
+        font = pg.font.Font('freesansbold.ttf', 20)
+        text = "turn"
+        if turn == 0: text = "White " + text
+        else: text = "Black " + text
+        text = font.render(text, False, Piece.BLACK)
+        textRect = text.get_rect()
+        textRect.center = (size + 50, mid + 10)
+        screen.blit(text, textRect)
+        pg.display.flip()
         for _ in logic.playOneTurn(stacks, dices[0].get_dice(), dices[1].get_dice(), turns[turn], removedPieces):
-            print("Played")
             screen.blit(background_image, [0, 0])
+            screen.blit(text, textRect)
             for s in stacks:
                 s.draw(screen)
             for dice in dices:
@@ -182,10 +187,27 @@ def main():
         
             pg.display.flip()
             clock.tick(30)
+            
+            if not logic.hasLeft(stacks, turns[turn]):
+                if turn == 0: return "White"
+                if turn == 1: return "Black"
+                
         turn = 1 - turn
+
 
 
 if __name__ == '__main__':
     pg.init()
-    main()
+    message_display(main() + " has won", WIDTH//2, 300)
+    message_display("To exit press ESC", WIDTH // 2, 500)
+    done = False
+    while not done:
+        for event in pg.event.get():
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                    done = True
+            if event.type == pg.QUIT:
+                done = True
+        
+        clock.tick(30)
     pg.quit()
