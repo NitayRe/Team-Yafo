@@ -17,6 +17,9 @@ class Stack:
     def isEmpty(self):
         return self.items == []
 
+	def __len__(self):
+		return len(self.items)
+
     def push(self, item):
         self.items.append(item)
 
@@ -24,31 +27,14 @@ class Stack:
         return self.items.pop()
 
     def peek(self):
-        return self.items[len(self.items) - 1]
+        return self.items[-1]
 
 
 class DrawableStack(Stack):
     def __init__(self, x, y):
         super().__init__()
-        self.items = []
         self.x = x
         self.y = y
-
-    def isEmpty(self):
-        return self.items == []
-
-    def push(self, item):
-        if self.items.__len__() == 1 and item.getType() != self.peek().getType():
-            self.pop()
-            self.items.append(item)
-        elif self.items.__len__() < 5:
-            self.items.append(item)
-
-    def pop(self):
-        self.items.pop()
-
-    def peek(self):
-        return self.items[len(self.items) - 1]
 
     def draw(self):
         x = self.x
@@ -72,8 +58,6 @@ class DrawableStack(Stack):
 screen = pg.display.set_mode((800, 800))
 background_image = pg.image.load("background.bmp")
 clock = pg.time.Clock()
-velocity_x = 0
-velocity_y = 0
 black = 0, 0, 0
 white = 255, 255, 255
 BLACKPIECE = 0
