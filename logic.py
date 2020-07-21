@@ -1,7 +1,8 @@
 import pieces
 import dice
 import pygame as pg
-from game import message_display
+from game import message_display, whichStack
+import time
 
 WHITE = pieces.Piece.WHITE
 BLACK = pieces.Piece.BLACK
@@ -62,8 +63,9 @@ def trySpecialMove(stacks, possibleSteps, removed, turn, index):
     removeIndex = 0
     if turn == BLACK: removeIndex = 1
     if hasOut(removed, turn):
-        step = min(index, 23 - index)
+        step = min(index + 1, 24 - index)
         if step in possibleSteps:
+            
             if stacks[index].isEmpty() or stacks[index].getColor() == turn:
                 stacks[index].push(removed[removeIndex].pop())
                 possibleSteps.remove(step)
@@ -80,7 +82,6 @@ def trySpecialMove(stacks, possibleSteps, removed, turn, index):
 
     
     if isEndOfGame(stacks, turn) and (not stacks[index].isEmpty()) and stacks[index].getColor() == turn:
-        print("Im here")
         step = min(index, 23 - index)
         for x in possibleSteps:
             if x >= step:
@@ -101,7 +102,7 @@ def getCoordinate():
                 exit(1)
             x = pg.mouse.get_pos()[0]
             y = pg.mouse.get_pos()[1]
-            index = game.whichStack(x, y)
+            index = whichStack(x, y)
             if mousePressed:
                 clock.tick(300)
                 return index
@@ -118,15 +119,13 @@ def playOneTurn(stacks, dice1, dice2, turn, removed):
     while len(possibleSteps) != 0:
         if not moveExists(stacks, turn, removed, possibleSteps):
             message_display("No valid Moves", 400,60)
-            clock.tick(500)
+            time.sleep(1)
             return
         print(possibleSteps)
         src = getCoordinate()
         played = trySpecialMove(stacks, possibleSteps, removed, turn, src)
         
-        print(src)
         if played:
-            step = min(src, 23-src)
             yield 1
             continue
         
@@ -150,11 +149,14 @@ def moveExists(stacks, turn, removed, possibleSteps):
                 if isAvailable(stacks, turn, 24-i):
                     return True
         return False
+    
     srcs = {i for i in range(24) if (not stacks[i].isEmpty()) and stacks[i].getColor() == turn}
+    if len(srcs) == 0: return False
+    
     if isEndOfGame(stacks, turn):
         maxDie = max(possibleSteps)
         if turn == WHITE:
-            if max(srcs) + maxDi > 23:
+            if max(srcs) + maxDie > 23:
                 return True
         if turn == BLACK:
             if min(srcs) - maxDie < 0:
@@ -167,3 +169,10 @@ def moveExists(stacks, turn, removed, possibleSteps):
 
 
 
+
+
+
+def hasLeft(stacks, color):
+    for stack in stacks:
+        if (not stack.isEmpty()) and stack.getColor() == color: return True
+    return False
