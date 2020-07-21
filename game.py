@@ -62,7 +62,7 @@ def main():
 			left_mouse_down = False
 			right_mouse_down = False
 			middle_mouse_down = False
-		
+
 		screen.blit(background_image, [0, 0])
 		for s in stacks:
 			s.draw(screen)
