@@ -1,5 +1,8 @@
 import pieces
 import dice
+import pygame as pg
+import game
+
 WHITE = 255,255,255
 BLACK = 0,0,0
 
@@ -31,3 +34,8 @@ def playOneTurn(turn, dice1, dice2):
 	if (dice1 == dice2):
 		possibleSteps.append(dice1)
 		possibleSteps.apppend(dice1)
+	
+	
+	while len(possibleSteps) != 0:
+	
+	
