@@ -1,55 +1,5 @@
 import pygame as pg
-
-
-
-class Piece:
-	BLACK = 0,0,0
-	WHITE = 255,255,255
-    
-	def __init__(self, color):
-		self.type = color
-
-	def getColor(self):
-		return self.type
-
-
-class Stack:
-	def __init__(self):
-		self.items = []
-
-	def isEmpty(self):
-		return self.items == []
-
-	def push(self, item):
-		self.items.append(item)
-
-	def pop(self):
-		return self.items.pop()
-
-	def peek(self):
-		return self.items[-1]
-
-
-class DrawableStack(Stack):
-
-	
-	def __init__(self, x, y):
-		super().__init__()
-		self.x = x
-		self.y = y
-
-	def draw(self, screen):
-		x = self.x
-		y = self.y
-		if y == 0:
-			for piece in self.items:
-				pg.draw.circle(screen, piece.getColor(), (x + 45, y + 40), 20)
-				y += 40
-		else:
-			for piece in self.items:
-				pg.draw.circle(screen, piece.getColor(), (x + 45, y - 40), 20)
-				y -= 40
-
+import pieces
 
 screen = pg.display.set_mode((800, 800))
 background_image = pg.image.load("background.bmp")
@@ -60,15 +10,15 @@ stackX = 0
 stackY = 0
 for i in range(24):
 	if i<12:
-		stacks.append(DrawableStack(stackX, stackY))
+		stacks.append(pieces.DrawableStack(stackX, stackY))
 		stackX += 65
 	elif i == 12:
 		stackX = 0
 		stackY = 800
-		stacks.append(DrawableStack(stackX,stackY))
+		stacks.append(pieces.DrawableStack(stackX,stackY))
 		stackX += 65
 	else:
-		stacks.append(DrawableStack(stackX, stackY))
+		stacks.append(pieces.DrawableStack(stackX, stackY))
 		stackX += 65
 
 screen.blit(background_image, [0, 0])
@@ -92,13 +42,13 @@ def main():
 				x = pg.mouse.get_pos()[0]
 				y = pg.mouse.get_pos()[1]
 				index = whichStack(x, y)
-				stacks[index].push(Piece(Piece.BLACK))
+				stacks[index].push(pieces.Piece(pieces.Piece.BLACK))
 
 			if right_mouse_down:
 				x = pg.mouse.get_pos()[0]
 				y = pg.mouse.get_pos()[1]
 				index = whichStack(x, y)
-				stacks[index].push(Piece(Piece.WHITE))
+				stacks[index].push(pieces.Piece(pieces.Piece.WHITE))
 
 			if event.type == pg.KEYDOWN:
 				if event.key == pg.K_SPACE:
