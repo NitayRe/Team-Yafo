@@ -1,6 +1,6 @@
 import pygame as pg
 
-
+HEIGHT = 600
 
 class Piece:
 	BLACK = 0,0,0
@@ -13,9 +13,9 @@ class Piece:
 		return self.color
 
 	def draw(self, screen, x, y):
-		pg.draw.circle(screen, self.getColor(), (x + 45, y + 40), 20)
+		pg.draw.circle(screen, self.getColor(), (x + 45, y), 20)
 		oppColor = 255-self.color[0], 255-self.color[1], 255-self.color[2]
-		pg.draw.circle(screen, oppColor, (x + 45, y + 40), 20, 2)
+		pg.draw.circle(screen, oppColor, (x + 45, y), 20, 2)
 
 
 class Stack:
@@ -49,19 +49,19 @@ class Stack:
 		y = self.y
 		if y == 0:
 			for piece in self.items:
-				piece.draw(screen, x, y)
+				piece.draw(screen, x, y + 40)
 				y += 40
 				
-				if abs(y - self.y) > game.HEIGHT // 2 - 40:
+				if abs(y - self.y) > HEIGHT // 2 - 60:
 					y = 5
 					x -= 5
 			
 		else:
 			for piece in self.items:
-				piece.draw(screen, x, y)
+				piece.draw(screen, x, y - 40)
 				y -= 40
 			
-				if abs(y - self.y) > game.HEIGHT // 2 - 40:
+				if abs(y - self.y) > HEIGHT // 2 - 60:
 					y = self.y - 5
 					x -= 5
 			
