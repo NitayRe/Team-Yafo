@@ -14,8 +14,10 @@ class Piece:
 
 
 class Stack:
-	def __init__(self):
+	def __init__(self, x, y):
 		self.items = []
+		self.x = x
+		self.y = y
 
 	def isEmpty(self):
 		return self.items == []
@@ -29,14 +31,10 @@ class Stack:
 	def peek(self):
 		return self.items[-1]
 
+	def getColor(self):
+		return self.pop().getColor()
 
-class DrawableStack(Stack):
 
-	
-	def __init__(self, x, y):
-		super().__init__()
-		self.x = x
-		self.y = y
 
 	def draw(self, screen):
 		x = self.x
