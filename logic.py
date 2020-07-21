@@ -7,7 +7,8 @@ WHITE = pieces.Piece.WHITE
 BLACK = pieces.Piece.BLACK
 
 clock = pg.time.Clock()
-
+homeBlack = {x for x in range(6)}
+homeWhite = {x for x in range(23, 23-6, -1)}
 # assume islegal function was called before, and the move found as legal.
 def move(src, dest, stacks, removed):
     if (len(stacks[dest]) == 1) and (stacks[dest].getColor() != stacks[src].getColor()):
@@ -40,13 +41,12 @@ def islegal(stacks, src, dest, possibleSteps, turn, removed):
     
     return True
 
-validBlack = {x for x in range(6)}
-validWhite = {x for x in range(23, 23-6, -1)}
+
 def isEndOfGame(stacks, color):
-    valid = validWhite
-    if color == BLACK: valid = validBlack
+    home = homeWhite
+    if color == BLACK: home = homeBlack
     for i in range(24):
-        if i in valid: continue
+        if i in home: continue
         if stacks[i].isEmpty(): continue
         if (stacks[i].getColor() == color):
             return False
@@ -64,12 +64,12 @@ def trySpecialMove(stacks, possibleSteps, removed, turn, index):
     if hasOut(removed, turn):
         step = min(index, 23 - index)
         if step in possibleSteps:
-            if (stacks[index].isEmpty() or stacks[index].getColor() == turn):
+            if stacks[index].isEmpty() or stacks[index].getColor() == turn:
                 stacks[index].push(removed[removeIndex].pop())
                 possibleSteps.remove(step)
                 return True
             
-            if (len(stacks[index]) == 1):
+            if len(stacks[index]) == 1:
                 removed[1-removeIndex].push(stacks[index].pop())
                 stacks[index].push(removed[removeIndex].pop())
                 possibleSteps.remove(step)
@@ -110,7 +110,7 @@ def getCoordinate():
             
 def playOneTurn(stacks, dice1, dice2, turn, removed):
     possibleSteps = [dice1, dice2]
-    if (dice1 == dice2):
+    if dice1 == dice2:
         possibleSteps *= 2
 
     possibleSteps.sort()
@@ -131,4 +131,5 @@ def playOneTurn(stacks, dice1, dice2, turn, removed):
             move(src, dest,stacks, removed)
             possibleSteps.remove(abs(dest-src))
             yield 1
-        
+def moveExists(stacks, turn, removed, possible):
+    srcs = {x for x in stacks}
